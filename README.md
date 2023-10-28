@@ -1,4 +1,4 @@
-# For A Good User Experience, Call...
+# For A Good User Experience, Call (555-CSS-GOOD)
 
 
 ## Consideration #1: Shifting Page Content
@@ -12,6 +12,29 @@ In both cases, when error messages are rendered on the form, the form grows eith
 
 ### Rendering Validation Error Messages on a Form
 
+```
+{/* YOUR FORM COMPONENT (Render Errors at Top) */}
+
+<div className="form-errors">
+  {yourValidationErrors.map((err, idx) => (
+    <div key={idx}>{err}</div>
+  ))}
+</div>
+
+{/* YOUR FORM COMPONENT (Render Error below input) */}
+
+<input type="email" className="form-input"/>
+<div className="form-errors">{errors.email}</div>
+
+/* YOUR CSS FILE FOR FORM COMPONENT */
+
+.form-errors {
+  min-height: THE VALUE YOU'VE DECIDED ON
+  ...
+  ...
+}
+
+```
 
 ### Adding and Removing Borders from Elements
 
