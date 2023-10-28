@@ -68,14 +68,6 @@ In both cases, when error messages are rendered on the form, the form grows eith
 
 ## Consideration #2: Making Elements and Text Responsive
 
-```
-/* YOUR CSS FILE */
+<img width="713" alt="responsive" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/b56c4724-6e47-4486-8cc9-a6393d1522d0">
 
-.elementClassName {
-  width: max(min(80px, 4vw), 200px);
-  font-size: max(min(10px, 2vw), 22px);
-}
-
-
-```
 
