@@ -70,4 +70,15 @@ In both cases, when error messages are rendered on the form, the form grows eith
 
 <img width="713" alt="responsive" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/b56c4724-6e47-4486-8cc9-a6393d1522d0">
 
+## Consideration #3: Prevent Bad Actors from Breaking Your Site by Entering Long Strings of Data
+```
+/* YOUR CSS FILE */
 
+.classForElementRenderingUserInput {
+  word-break: break-all;
+}
+```
+
+The CSS above will prevent a malicious user from breaking your page by shifting content too far to the left or right.
+Additionally, we'll want to protect our site from being overrun with input that makes the height of a rendered element inhospitable. To this end, make this next statement your new design philosophy: EVERY input should have a MAX-LENGTH that one of your form validators should be checking for and ENFORCING!!! NO EXCEPTIONS!!! Even if the limit is high, it should be there!! NO EXCEPTIONS!!!
+And finally, ALL constraints enforced on the frontend should match limits imposed by your database. Additionally, these validations should also be enforced on the backend. Malicious actors DON'T NEED YOUR FRONTEND TO INTERACT WITH YOUR SERVER!!! 
