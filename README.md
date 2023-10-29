@@ -136,3 +136,166 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
 }
 
 ```
+
+## Consideration #6: AWS for Image Uploads (Including Pre-Population of Edit form with Image)
+
+A common issue that trips students up when implementing AWS for image uploads is the EDIT FORM!! Pre-populating the form with the Image and especially the original file name (if applicable) poses some interesting challenges. Below we shall offer some generic solutions for this issue. Examples will be given for using a file input that reflects the selected filename on the screen and one that simply renders a thumbnail of the selected file. In addition to these concerns, we'll address validating this data in our endpoint using wtforms. The example will show a custom validator function that will handle cases where the user has NOT chosen a file to upload and the case in which they have. If file uploads will be mandatory in your application, your form may look different and will probably benefit from simply using the validators builtin to WTForms (Refer to Brad's AWS walkthrough, if so).
+```
+Input WITH filename (NOTE: To pre-populate the Edit Form with the original filename (we use random keys in AWS), we will need to save the original filename as a column in our database for this row!)
+
+{/* OUR FORM COMPONENT employing a file input that is styled as a button with a small thumbnail element that will render the selected file above it.
+Additionally we are positioning an element ABOVE the default file label that typically displays the filename.
+As we cannot programmatically set this value (the browser simply doesn't allow it), we must imitate this behavior with our own element.
+In this case, the <div> with the className of "file-inputs-filename". */}
+
+<div className="file-inputs-container">
+  <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input" onChange={fileWrap}></input>
+  <div className="file-inputs-filename" style={{ color: filename === maxFileError ? "red" : "#B7BBBF" }}>{filename}</div>
+  <div className="file-inputs-optional">{optional}</div>
+  <div style={{ position: "absolute", top: "-34px", left: "39px"}}><img src={imageURL} className="thumbnails"></img></div>
+  <label htmlFor="post-image-input" className="file-input-labels">Choose File</label>
+</div>
+
+/* OUR CSS FILE */
+
+.file-inputs-container {
+  position: relative; /* This allows the elements within it to be positioned without taking this element out of the document flow. As it's parent is NOT positioned, it only effects the children. */
+  margin-bottom: 32px;
+}
+
+#post-image-input {
+  visibility: hidden;
+  /* Here we make the default file input button invisible on the page.
+     As the label for this input is connected to it using the htmlFor property, we can style the label as a button instead, and have it behave the same as the <input type="file" />
+     This extra step is necessary as the default <input type="file" /> CANNOT be styled with CSS!!
+  */
+}
+
+/*
+  Important note here is that the element is positioned "absolute".
+  You will need to adjust the top and left properties to get the label to appear where you want it on your page.
+ */
+
+.file-inputs-filename {
+  position: absolute;'
+  top: 40px;
+  left: 144px;
+  z-index: 2;
+  color: var(--minimal-border);
+  background-color: var(--minimal-background);
+  font-size: 14px;
+  min-width: 90px;
+  padding-bottom: 2px;
+}
+
+/*
+  This label was added to clarify for the user that uploading an image is OPTIONAL.
+  Feel free to implement this anyway that makes sense for you. Including NOT doing it!!
+*/
+
+.file-inputs-optional {
+  position: absolute;
+  font-size: 14px;
+  color: red;
+  top: 41px;
+  left: 240px;
+}
+
+/*
+  Here we set fixed dimensions for the thumbnail. Size it to your liking!
+  Positioning for this element has been done inline, in the hopes of making this class more re-usable.
+  Feel free to position it in the CSS file if it suits your aims.
+*/
+
+.thumbnails {
+  width: 50px;
+  height: 50px;
+  outline: none;
+}
+
+/*
+  The 2 directives below style our label like a button and give it a nice on hover effect.
+*/
+
+.file-input-labels {
+  display: block;
+  border: 2px solid var(--minimal-border);
+  border-radius: 4px;
+  color: var(--minimal-border);
+  background-color: var(--minimal-background);
+  width: 124px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 7px;
+  transition: all 0.3s ease-in-out;
+}
+
+.file-input-labels:hover {
+  color: white;
+  border-color: white;
+  cursor: pointer;
+}
+```
+```
+Input WITHOUT filename (This implementation is noticably simpler than the one above, FYI.)
+{/* OUR FORM COMPONENT employing a file input that is styled as a button with a small thumbnail element that will render the selected file inside of it. */}
+
+<div className="file-inputs-container">
+  <input type="file" accept="image/png, image/jpeg, image/jpg" id="post-image-input2" onChange={fileWrap2}></input>
+  <label htmlFor="post-image-input2" className="file-input-labels-noname"><img src={imageURL2} className="thumbnails-noname"></img></label>
+</div>
+
+/* OUR CSS FILE */
+
+/* Same as above */
+.file-inputs-container {
+  position: relative; /* This allows the elements within it to be positioned without taking this element out of the document flow. As it's parent is NOT positioned, it only effects the children. */
+  margin-bottom: 32px;
+}
+
+/*
+  As the htmlFor property requires a unique id, here we simply add a 2 to the end of the original id name. Unless you are allowing multiple images, this is not actually necessary.
+  One file input could be named anything that you desire. Just note that if you have multiple, they all need different names!
+*/
+
+#post-image-input2 {
+  visibility: hidden;
+}
+
+/*
+  As before, we simply style the label as a button
+  In this configuration, the button itself will also provide the thumbnail.
+*/
+
+.file-input-labels-noname {
+  position: absolute;
+  top: -48px;
+  right: 0px;
+  display: block;
+  border-radius: 6px;
+  color: var(--minimal-border);
+  background-color: var(--minimal-background);
+  width: 120px;
+  height: 120px;
+  transition: all 0.3s ease-in-out;
+}
+
+.file-input-labels-noname:hover {
+  cursor: pointer;
+}
+
+/*
+  In this configuration, I've chosen to put the border on the image tag.
+*/
+
+.thumbnails-noname {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--minimal-border);
+  border-radius: 6px;
+}
+
+```
+
+ADDITIONAL NOTE: BOTH of these methods employ a default image that is set as the src property of the thumbnail <img> tag BEFORE a file is selected. In both cases I am using a screenshot that I took of the site so that I could use a file that was the same color as the site background. In the case of the button WITHOUT the filename labels, I added the PLUS icon to the page before taking the screen shot, so that it clarifies for the user that they can click on the input. Do what feels right for you.
