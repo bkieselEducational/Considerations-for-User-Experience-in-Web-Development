@@ -107,7 +107,7 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
     className="post-inputs"
     required
   />
-  <div className="floating-placeholders" style={{ "top": title ? "-10.5px" : <YOUR DEFAULT> }}><label>Title</label></div>
+  <div className="floating-placeholders" style={{ top: title ? "-10.5px" : <YOUR DEFAULT> }}><label>Title</label></div>
   <div className="post-errors-container">
     <div className="post-errors">{titleError}</div>
   </div>
