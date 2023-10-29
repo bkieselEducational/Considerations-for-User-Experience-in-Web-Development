@@ -94,7 +94,7 @@ A user should NEVER have to figure out how our app works! It is our job to GUIDE
 
 ## Consideration #5: Labelling Inputs
 
-Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placeholder text which disappears the second a user types into it is considered bad practice. With this mind, you really only have two options. 1) Label the inputs and forget about it! 2) Imitate placeholder text by using CSS positioning. With this method, the user will see an input that APPEARS to be labelled with placeholder text, but once they click into the input (focus it), the "placeholder" label will move somewhere else so that the user can type but see the label at the same time. The label could shift into the border (shown below), could move to the left or right of the input, or up and out and above or below the input.
+Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placeholder text which disappears the second a user types into it is considered bad practice. With this in mind, you really only have two options. 1) Label the inputs and forget about it! 2) Imitate placeholder text by using CSS positioning. With this method, the user will see an input that APPEARS to be labelled with placeholder text, but once they click into the input (focus it), the "placeholder" label will move somewhere else so that the user can type but see the label at the same time. The label could shift into the border (shown below), could move to the left or right of the input, or up and out and above or below the input.
 
 ```
 {/* YOUR FORM COMPONENT */}
