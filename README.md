@@ -299,3 +299,44 @@ Input WITHOUT filename (This implementation is noticably simpler than the one ab
 ```
 
 ADDITIONAL NOTE: BOTH of these methods employ a default image that is set as the src property of the thumbnail <img> tag BEFORE a file is selected. In both cases I am using a screenshot that I took of the site so that I could use a file that was the same color as the site background. In the case of the button WITHOUT the filename labels, I added the PLUS icon to the page before taking the screen shot, so that it clarifies for the user that they can click on the input. Do what feels right for you.
+
+And finally, let's look at a custom validator for WTForms on our backend. Note that in MOST scenarios, your feature will probably REQUIRE an image and therefore it is more practical to use the builtin validators that ship with WTForms. However, for the Edit, you may want to employ something similar to this as it allows for a value of None in the FileField which is typical of an Edit form!!
+
+```
+allowed_extensions = { 'jpg': True, 'jpeg': True, 'gif': True, 'png': True }
+
+def find_file_extension(filename):
+    ext = ""
+    for c in reversed(filename):
+        if c != '.':
+            ext = c + ext
+        else:
+            break
+
+    return ext
+
+def image(form, field):
+    image = field.data
+
+    if image == None:
+        return True # Because a NEW file upload is not necessary on update.
+
+    image.seek(0, os.SEEK_END) # move the cursor to the final byte of the file
+    file_length = image.tell() # Get the size of the file in bytes!
+    image.seek(0) # reset the cursor to the beginning of the file. Otherwise we will upload NO bytes to the s3 bucket!!
+
+    if file_length > 5000000:
+        raise ValidationError('File exceeds the maximum size of 5Mb')
+
+    file_extension = find_file_extension(image.filename)
+    if allowed_extensions[file_extension]:
+        return True
+    else:
+        raise ValidationError('Allowed file types are .jpg, .jpeg, .png, .gif')
+
+class PostForm(FlaskForm):
+  title = StringField('title', validators=[DataRequired(), title])
+  content = StringField('content', validators=[DataRequired(), content])
+  filename = StringField('filename')
+  image = FileField('image', validators=[image])
+```
