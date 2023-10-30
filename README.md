@@ -67,6 +67,8 @@ In both cases, when error messages are rendered on the form, the form grows eith
 ```
 
 ## Consideration #2: Making Elements and Text Responsive
+This is where things like Media Queries come into play. Making sure that the sizes of your site's content adhere to certain boundaries while be responsive and accomodating to different screen sizes.
+In fact the example below depicts an alternative way of defining a Media Query.
 
 <img width="713" alt="responsive" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/b56c4724-6e47-4486-8cc9-a6393d1522d0">
 
