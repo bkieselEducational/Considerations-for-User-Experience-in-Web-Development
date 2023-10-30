@@ -139,6 +139,13 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
 
 ## Consideration #6: AWS for Image Uploads (Including Pre-Population of Edit form with Image)
 
+# File Inputs BEFORE file selection:
+<img width="1255" alt="file_inputs_before_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/5da5a6af-907e-4d6e-ab7e-6a37ba7f095f">
+
+# FIle Inputs AFTER file selection:
+<img width="1254" alt="file_inputs_after_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/88d6bf5c-a27f-4c76-b9fb-e10d5d20bfc9">
+
+
 A common issue that trips students up when implementing AWS for image uploads is the EDIT FORM!! Pre-populating the form with the Image and especially the original file name (if applicable) poses some interesting challenges. Below we shall offer some generic solutions for this issue. Examples will be given for using a file input that reflects the selected filename on the screen and one that simply renders a thumbnail of the selected file. In addition to these concerns, we'll address validating this data in our endpoint using wtforms. The example will show a custom validator function that will handle cases where the user has NOT chosen a file to upload and the case in which they have. If file uploads will be mandatory in your application, your form may look different and will probably benefit from simply using the validators builtin to WTForms (Refer to Brad's AWS walkthrough, if so).
 ```
 Input WITH filename (NOTE: To pre-populate the Edit Form with the original filename (we use random keys in AWS), we will need to save the original filename as a column in our database for this row!)
