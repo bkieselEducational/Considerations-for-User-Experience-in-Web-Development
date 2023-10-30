@@ -159,7 +159,7 @@ NOTE: The trick to having a thumbnail for the newly selected image is to generat
 
     // Check for max image size of 5Mb
     if (tempFile.size > 5000000) {
-      setFilename(maxFileError);
+      setFilename(maxFileError); // "Selected image exceeds the maximum file size of 5Mb"
       return
     }
 
