@@ -139,10 +139,10 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
 
 ## Consideration #6: AWS for Image Uploads (Including Pre-Population of Edit form with Image)
 
-# File Inputs BEFORE file selection:
+### File Inputs BEFORE file selection:
 <img width="1255" alt="file_inputs_before_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/5da5a6af-907e-4d6e-ab7e-6a37ba7f095f">
 
-# FIle Inputs AFTER file selection:
+### FIle Inputs AFTER file selection:
 <img width="1254" alt="file_inputs_after_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/88d6bf5c-a27f-4c76-b9fb-e10d5d20bfc9">
 
 
