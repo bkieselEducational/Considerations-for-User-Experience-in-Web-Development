@@ -1,4 +1,4 @@
-# For A Good User Experience, Call (555-CSS-GOOD)
+# For A Good User Experience, Call... 
 
 
 ## Consideration #1: Shifting Page Content
@@ -80,7 +80,7 @@ In both cases, when error messages are rendered on the form, the form grows eith
 ```
 
 The CSS above will prevent a malicious user from breaking your page by shifting content too far to the left or right.
-Additionally, we'll want to protect our site from being overrun with input that makes the height of a rendered element inhospitable. To this end, make this next statement your new design philosophy: EVERY input should have a MAX-LENGTH that one of your form validators should be checking for and ENFORCING!!! NO EXCEPTIONS!!! Even if the limit is high, it should be there!! NO EXCEPTIONS!!!
+Additionally, we'll want to protect our site from being overrun with input that makes the height of a rendered element inhospitable. To this end, we have this to say: EVERY input should have a MAX-LENGTH that one of your form validators should be checking for and ENFORCING!!! Even in the event that you want to give user's free reign, you'll want to at least render a maximum length on the page to keep things civil. Perhaps you'd have a function that truncates the content at a given length and add an elipses to indicate the run on. Either way, YOU should be in control of your page layout NOT your users! Even if the limit is high, it should be there, in one form or another!
 And finally, ALL constraints enforced on the frontend should match limits imposed by your database. Additionally, these validations should also be enforced on the backend. Malicious actors DON'T NEED YOUR FRONTEND TO INTERACT WITH YOUR SERVER!!! 
 
 ## Consideration #4: Disabling the Submit Button
