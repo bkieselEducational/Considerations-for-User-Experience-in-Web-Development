@@ -144,7 +144,7 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
 ### File Inputs BEFORE file selection:
 <img width="1255" alt="file_inputs_before_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/5da5a6af-907e-4d6e-ab7e-6a37ba7f095f">
 
-### FIle Inputs AFTER file selection:
+### File Inputs AFTER file selection:
 <img width="1254" alt="file_inputs_after_selection" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/88d6bf5c-a27f-4c76-b9fb-e10d5d20bfc9">
 
 
@@ -370,4 +370,37 @@ class PostForm(FlaskForm):
   content = StringField('content', validators=[DataRequired(), content])
   filename = StringField('filename')
   image = FileField('image', validators=[image])
+```
+## Consideration #7: The Footer Issue
+
+The Footer Issue, of course, is the problem we observe when we have INSUFFICIENT content on the page to fill up the browser window. In this scenario, what we find is that our Footer "floats" up to the bottom of the content, making for an awkward page layout. There are multiple solutions to this issue, and most have some kind of trade off. The solution I have found that is both simple to implement and also doesn't seem to have any large drawbacks (that I've seen...) is to simply put the Footer element outside of the element in which the page conent will be rendered and use some CSS settings to make the Footer render at the bottom of the page without adding a scrollbar! The Footer height should be a fixed, known quantity so that we can set a negative margin on the content element. See code below.
+
+Simple HTML / JSX:
+```
+function App() {
+
+  return (
+    <>
+      <div className="content"></div>
+      <footer className="footer"></footer>
+    </>
+  )
+}
+```
+
+CSS File:
+```
+.content {
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: magenta;
+  margin-bottom: -40px; /* Here we "suck" the Footer up "into" the content div so that we don't create an unnecessary vertical scrollbar */
+}
+
+.footer {
+  min-width: 100%;
+  min-height: 40px;
+  background-color: black;
+}
+
 ```
