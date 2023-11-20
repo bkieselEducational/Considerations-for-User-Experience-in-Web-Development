@@ -373,7 +373,7 @@ class PostForm(FlaskForm):
 ```
 ## Consideration #7: The Footer Issue
 
-The Footer Issue, of course, is the problem we observe when we have INSUFFICIENT content on the page to fill up the browser window. In this scenario, what we find is that our Footer "floats" up to the bottom of the content, making for an awkward page layout. There are multiple solutions to this issue, and most have some kind of trade off. The solution I have found that is both simple to implement and also doesn't seem to have any large drawbacks (that I've seen...) is to simply put the Footer element outside of the element in which the page conent will be rendered and use some CSS settings to make the Footer render at the bottom of the page without adding a scrollbar! The Footer height should be a fixed, known quantity so that we can set a negative margin on the content element. See code below.
+The Footer Issue, of course, is the problem we observe when we have INSUFFICIENT content on the page to fill up the browser window. In this scenario, what we find is that our Footer "floats" up to the bottom of the content, making for an awkward page layout. There are multiple solutions to this issue, and most have some kind of trade off. The solution I have found that is both simple to implement and also doesn't seem to have any large drawbacks (that I've seen...) is to simply put the Footer element outside of the element in which the page conent will be rendered and use some CSS settings to make the Footer render at the bottom of the page without adding a scrollbar! The Footer height should be a fixed, known quantity so that we can set the outer container to 100vh and then accomodate the height of our Footer within.
 
 Simple HTML / JSX:
 ```
@@ -381,8 +381,13 @@ function App() {
 
   return (
     <>
-      <div className="content"></div>
-      <footer className="footer"></footer>
+     <div id="page-container">
+       <div id="content-wrap">
+         <!-- all other page / app content -->
+         <!-- your Router, etc. -->
+       </div>
+       <footer id="footer"></footer>
+     </div>
     </>
   )
 }
@@ -390,14 +395,18 @@ function App() {
 
 CSS File:
 ```
-.content {
+#page-container {
   min-width: 100%;
   min-height: 100vh;
   background-color: magenta;
-  margin-bottom: -40px; /* Here we "suck" the Footer up "into" the content div so that we don't create an unnecessary vertical scrollbar */
+  position: relative;
 }
 
-.footer {
+#content-wrap {
+  padding-bottom: 40px; /* Height of your Footer */
+}
+
+#footer {
   min-width: 100%;
   min-height: 40px;
   background-color: black;
