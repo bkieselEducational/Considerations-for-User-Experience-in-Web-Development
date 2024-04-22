@@ -12,7 +12,7 @@ In both cases, when error messages are rendered on the form, the form grows eith
 
 ### Rendering Validation Error Messages on a Form
 
-```
+```javascript
 {/* YOUR FORM COMPONENT (Render Errors at Top) */}
 
 <div className="form-errors">
@@ -38,7 +38,7 @@ In both cases, when error messages are rendered on the form, the form grows eith
 
 ### Adding and Removing Borders from Elements
 
-```
+```css
 /*** Your CSS File ***/
 
 :root {
@@ -73,7 +73,7 @@ In fact the example below depicts an alternative way of defining a Media Query.
 <img width="713" alt="responsive" src="https://github.com/bkieselEducational/Considerations-for-User-Experience-in-Web-Development/assets/131717897/b56c4724-6e47-4486-8cc9-a6393d1522d0">
 
 ## Consideration #3: Prevent Bad Actors from Breaking Your Site by Entering Long Strings of Data
-```
+```css
 /* YOUR CSS FILE */
 
 .classForElementRenderingUserInput {
@@ -98,7 +98,7 @@ A user should NEVER have to figure out how our app works! It is our job to GUIDE
 
 Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placeholder text which disappears the second a user types into it is considered bad practice. With this in mind, you really only have two options. 1) Label the inputs and forget about it! 2) Imitate placeholder text by using CSS positioning. With this method, the user will see an input that APPEARS to be labelled with placeholder text, but once they click into the input (focus it), the "placeholder" label will move somewhere else so that the user can type but see the label at the same time. The label could shift into the border (shown below), could move to the left or right of the input, or up and out and above or below the input.
 
-```
+```javascript
 {/* YOUR FORM COMPONENT */}
 
 <div className="input-containers">
@@ -151,7 +151,7 @@ Rule of Thumb: ALL form inputs should be labelled AT ALL TIMES!!! Using placehol
 A common issue that trips students up when implementing AWS for image uploads is the EDIT FORM!! Pre-populating the form with the Image and especially the original file name (if applicable) poses some interesting challenges. Below we shall offer some generic solutions for this issue. Examples will be given for using a file input that reflects the selected filename on the screen and one that simply renders a thumbnail of the selected file. In addition to these concerns, we'll address validating this data in our endpoint using wtforms. The example will show a custom validator function that will handle cases where the user has NOT chosen a file to upload and the case in which they have. If file uploads will be mandatory in your application, your form may look different and will probably benefit from simply using the validators builtin to WTForms (Refer to Brad's AWS walkthrough, if so).
 
 NOTE: The trick to having a thumbnail for the newly selected image is to generate a local URL for it using Javascript. See the example 'fileWrap' function below.
-```
+```javascript
   const fileWrap = (e) => {
     e.stopPropagation();
 
@@ -171,7 +171,7 @@ NOTE: The trick to having a thumbnail for the newly selected image is to generat
   }
 ```
 
-```
+```javascript
 Input WITH filename (NOTE: To pre-populate the Edit Form with the original filename (we use random keys in AWS), we will need to save the original filename as a column in our database for this row!)
 
 {/* OUR FORM COMPONENT employing a file input that is styled as a button with a small thumbnail element that will render the selected file above it.
@@ -268,7 +268,7 @@ In this case, the <div> with the className of "file-inputs-filename". */}
   cursor: pointer;
 }
 ```
-```
+```javascript
 Input WITHOUT filename (This implementation is noticably simpler than the one above, FYI.)
 {/* OUR FORM COMPONENT employing a file input that is styled as a button with a small thumbnail element that will render the selected file inside of it. */}
 
@@ -333,7 +333,7 @@ ADDITIONAL NOTE: BOTH of these methods employ a default image that is set as the
 
 And finally, let's look at a custom validator for WTForms on our backend. Note that in MOST scenarios, your feature will probably REQUIRE an image and therefore it is more practical to use the builtin validators that ship with WTForms. However, for the Edit, you may want to employ something similar to this as it allows for a value of None in the FileField which is typical of an Edit form!!
 
-```
+```python
 allowed_extensions = { 'jpg': True, 'jpeg': True, 'gif': True, 'png': True }
 
 def find_file_extension(filename):
