@@ -86,13 +86,13 @@ Additionally, we'll want to protect our site from being overrun with input that 
 And finally, ALL constraints enforced on the frontend should match limits imposed by your database. Additionally, these validations should also be enforced on the backend. Malicious actors DON'T NEED YOUR FRONTEND TO INTERACT WITH YOUR SERVER!!! 
 
 ## Consideration #4: Disabling the Submit Button
-As a general rule, disabling the Submit button on a form UNTIL the user has satisfied input criteria is a TERRIBLE User Experience!!
+As a general rule, disabling the Submit button on a form UNTIL the user has satisfied input criteria is a generally confusing User Experience!! UNLESS...
 If this approach REALLY speaks to you and you want to incorporate it in a way that is acceptable to the User Experience, you will need to follow the guidelines set forth below.
 
 1. Either render instructions at the top of the form OR near each input that explains WHAT the user needs to do in order to satisfy the input criteria.
 2. As an alternative to the above, you'll need render validation errors AS the user is typing!! The error messages should render as soon as the user begins typing in a particular input and should disappear when an input validator has passed!
 
-A user should NEVER have to figure out how our app works! It is our job to GUIDE them through the apps functionality in as clear and simple of a way as possible! Disabling a Submit button and then leaving it to the user to figure out, is a sadistic act!! 
+A user should NEVER have to figure out how our app works! It is our job to GUIDE them through the apps functionality in as clear and simple of a way as possible! Disabling a Submit button and then leaving it to the user to figure out without any guidance is legitimately harsh!! 
 
 ## Consideration #5: Labelling Inputs
 
